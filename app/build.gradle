@@ -71,7 +71,7 @@ android {
             }*/
             storeFile = file("mykey.jks")
             storePassword = "android"
-            keyAlias = "android"
+            keyAlias = "key0"
             keyPassword = "android"
         }
     }
