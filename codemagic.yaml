@@ -17,7 +17,7 @@ workflows:
       #- chmod +x $FCI_BUILD_DIR/launcher_foreground.sh
       #- $FCI_BUILD_DIR/launcher_foreground.sh $icon_url $KEYSTORE_URL $STOREPASS $KEYALIAS $KEYPASS
       #- ls -l "$FCI_BUILD_DIR"
-      #- chmod +x "$FCI_BUILD_DIR/gradlew"
+      - chmod +x "$FCI_BUILD_DIR/gradlew"
       - "$FCI_BUILD_DIR/gradlew assembleRelease"
       - "$FCI_BUILD_DIR/gradlew bundleRelease"
     artifacts:
