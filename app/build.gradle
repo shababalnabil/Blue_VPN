@@ -62,23 +62,23 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            def keystoreProperties = new Properties()
+        create("releases") {
+            /*def keystoreProperties = new Properties()
             def keystorePropertiesFile = rootProject.file("keystore.properties")
 
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-            }
-            storeFile = file(keystoreProperties.getProperty("storeFile"))
-            storePassword = keystoreProperties.getProperty("storePassword")
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
+            }*/
+            storeFile = file("mykey.jks")
+            storePassword = "android"
+            keyAlias = "android"
+            keyPassword = "android"
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("releases")
             minifyEnabled true
             //signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
