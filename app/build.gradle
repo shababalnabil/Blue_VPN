@@ -64,16 +64,16 @@ android {
 
     signingConfigs {
         create("releases") {
-            /*def keystoreProperties = new Properties()
+            def keystoreProperties = new Properties()
             def keystorePropertiesFile = rootProject.file("keystore.properties")
 
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-            }*/
-            storeFile = file("mykey.jks")
-            storePassword = "android"
-            keyAlias = "key0"
-            keyPassword = "android"
+            }
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
+            storePassword = keystoreProperties.getProperty("storePassword")
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
         }
     }
 
