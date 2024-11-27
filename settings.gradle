@@ -1,0 +1,36 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+            credentials { username "48a9b4c06b5dabbc03328ddcdbb7dfd8fab253ae" }
+        }
+
+        maven { url 'https://plugins.gradle.org/m2/' }
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+            credentials {
+                username '48a9b4c06b5dabbc03328ddcdbb7dfd8fab253ae'
+                password ''
+            }
+        }
+
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+}
+
+rootProject.name = "Blue VPN source code"
+include ':app'
