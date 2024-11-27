@@ -10,6 +10,9 @@
 
 **/mipmap*/
 
+*.keystore
+
+
 # Generated files
 bin/
 gen/
