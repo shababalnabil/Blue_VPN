@@ -6,7 +6,7 @@ workflows:
       vars:
         java: 1.8
         gradle: 8.9
-        JAVA_HOME: "/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
+        JAVA_HOME: "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
     scripts:
       #- /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       #- brew install imagemagick
