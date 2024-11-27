@@ -8,6 +8,8 @@
 # Java class files
 *.class
 
+**/mipmap*/
+
 # Generated files
 bin/
 gen/

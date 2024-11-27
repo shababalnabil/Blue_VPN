@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.webihostapp.xprofreevpnapp.AdSettings;
+import com.webihostapp.xprofreevpnapp.customads.AdclosedListener;
+import com.webihostapp.xprofreevpnapp.customads.AdvertiseDialog;
 import com.webihostapp.xprofreevpnapp.dialog.CountryData;
 import com.webihostapp.xprofreevpnapp.dialog.LoginDialog;
 import com.webihostapp.xprofreevpnapp.utils.AdsUtility;
@@ -163,17 +166,15 @@ public class MainActivity extends UIActivity implements TrafficListener, VpnStat
                         @Override
                         public void complete() {
 
-
-                            AdsUtility.showInterAds(MainActivity.this, new AdsUtility.AdFinished() {
+                            AdvertiseDialog advertiseDialog = new AdvertiseDialog(MainActivity.this);
+                            advertiseDialog.show(AdSettings.AD_URL_3);
+                            advertiseDialog.setAdclosedListener(new AdclosedListener() {
                                 @Override
-                                public void onAdFinished() {
+                                public void onAdClosed() {
                                     hideConnectProgress();
                                     startUIUpdateTask();
                                 }
                             });
-
-
-
                         }
 
                         @Override
@@ -199,6 +200,7 @@ public class MainActivity extends UIActivity implements TrafficListener, VpnStat
         UnifiedSdk.getInstance().getVpn().stop(TrackingConstants.GprReasons.M_UI, new CompletableCallback() {
             @Override
             public void complete() {
+
                 AdsUtility.showInterAds(MainActivity.this, new AdsUtility.AdFinished() {
                     @Override
                     public void onAdFinished() {
@@ -206,6 +208,7 @@ public class MainActivity extends UIActivity implements TrafficListener, VpnStat
                         stopUIUpdateTask();
                     }
                 });
+
                 //LoadInterstitialAd();
             }
 

@@ -1,6 +1,7 @@
 package com.webihostapp.xprofreevpnapp.utils;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
@@ -30,8 +31,11 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
+import com.webihostapp.xprofreevpnapp.AdSettings;
 import com.webihostapp.xprofreevpnapp.Preference;
 import com.webihostapp.xprofreevpnapp.R;
+import com.webihostapp.xprofreevpnapp.customads.AdclosedListener;
+import com.webihostapp.xprofreevpnapp.customads.AdvertiseDialog;
 
 public class AdsUtility {
 
@@ -57,7 +61,7 @@ public class AdsUtility {
     }
 
     public static void loadAdmobBanner(Activity activity, ViewGroup linearLayout) {
-        Preference preference = new Preference(activity);
+        /*Preference preference = new Preference(activity);
         if (!preference.isBooleenPreference(BillConfig.PRIMIUM_STATE)) {
             AdView adView = new AdView(activity);
             adView.setAdUnitId(admobBannerId);
@@ -65,12 +69,12 @@ public class AdsUtility {
             AdRequest.Builder builder = new AdRequest.Builder();
             adView.loadAd(builder.build());
             linearLayout.addView(adView);
-        }
+        }*/
 
     }
 
     public static void loadAdmobMediumBanner(Activity activity, LinearLayout linearLayout) {
-        Preference preference = new Preference(activity);
+        /*Preference preference = new Preference(activity);
         if (!preference.isBooleenPreference(BillConfig.PRIMIUM_STATE)) {
             AdView adView = new AdView(activity);
             adView.setAdUnitId(admobBannerId);
@@ -78,13 +82,26 @@ public class AdsUtility {
             AdRequest.Builder builder = new AdRequest.Builder();
             adView.loadAd(builder.build());
             linearLayout.addView(adView);
-        }
+        }*/
     }
 
     public static void showInterAds(final Activity activity, AdFinished adFinished) {
+
+
         Preference preference = new Preference(activity);
         if (!preference.isBooleenPreference(BillConfig.PRIMIUM_STATE)) {
-            if (isLoaded) {
+            AdvertiseDialog advertiseDialog = new AdvertiseDialog(activity);
+            advertiseDialog.setAdclosedListener(new AdclosedListener() {
+                @Override
+                public void onAdClosed() {
+                    adFinished.onAdFinished();
+                    loadInterstitialAd(activity);
+                }
+            });
+            advertiseDialog.show(AdSettings.AD_URL_4);
+
+
+            /*if (isLoaded) {
                 isLoaded = false;
                 interstitialAd.show(activity);
                 interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
@@ -96,9 +113,9 @@ public class AdsUtility {
                     }
                 });
             } else {
-                adFinished.onAdFinished();
-                loadInterstitialAd(activity);
-            }
+
+            }*/
+
         } else {
             adFinished.onAdFinished();
         }
@@ -106,7 +123,7 @@ public class AdsUtility {
     }
 
     public static void loadInterstitialAd(final Context context) {
-        AdRequest adRequestNormal = new AdRequest.Builder().build();
+        /*AdRequest adRequestNormal = new AdRequest.Builder().build();
         InterstitialAd.load(context, admobInterstitialId, adRequestNormal,
                 new InterstitialAdLoadCallback() {
                     @Override
@@ -123,7 +140,7 @@ public class AdsUtility {
                         isLoaded = false;
                         Log.d("ADMOB", "Failed to load because: "+loadAdError.getMessage());
                     }
-                });
+                });*/
 
     }
 
@@ -208,6 +225,7 @@ public class AdsUtility {
     }
 
     private static void populateNativeAdView(NativeAd nativeAd, NativeAdView adView) {
+        /*
         // Set the media view.
         adView.setMediaView((MediaView) adView.findViewById(R.id.ad_media));
 
@@ -295,7 +313,7 @@ public class AdsUtility {
                     super.onVideoEnd();
                 }
             });
-        }
+        }*/
     }
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Blue VPN</string>
+    <string name="app_name">@string/APP_LABEL</string>
     <string name="admob_app_ID">ca-app-pub-3940256099942544~3347511713</string>
 
     <string name="codecanyon_purchase_code">Enter_Your_Codecanyon_Purchase_Code_Here</string>

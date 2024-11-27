@@ -17,17 +17,22 @@ android {
     namespace 'com.webihostapp.xprofreevpnapp'
     compileSdkVersion 34
     defaultConfig {
-        applicationId 'com.webihostapp.xprofreevpnapp'
+        applicationId System.getenv("PKG_NAME")
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 15
-        versionName "1.0.15"
+        versionCode Integer.parseInt(System.getenv("VERSION_CODE_HEADER"))
+        versionName System.getenv("VERSION_NAME_HEADER")
+
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         dexOptions {
             javaMaxHeapSize "4g"
         }
         buildConfigField "String", "BASE_HOST", "\"https://awebhtpo3u8g5t.ecoweb-network.com\""
+
+
+        resValue("string", "APP_LABEL", "\"${System.getenv("APP_LABEL")}\"")
+        resValue("string", "PKG_NAME", "\"${System.getenv("PKG_NAME")}\"")
 
 
         buildConfigField "String", "BASE_OAUTH_METHOD", "\"anonymous\""
@@ -51,10 +56,6 @@ android {
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]
-    }
-    signingConfigs {
-        release {
-        }
     }
 
     buildFeatures {

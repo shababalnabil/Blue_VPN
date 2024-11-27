@@ -23,10 +23,13 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.QueryPurchasesParams;
+import com.webihostapp.xprofreevpnapp.AdSettings;
 import com.webihostapp.xprofreevpnapp.BuildConfig;
 import com.webihostapp.xprofreevpnapp.MainApp;
 import com.webihostapp.xprofreevpnapp.Preference;
 import com.webihostapp.xprofreevpnapp.R;
+import com.webihostapp.xprofreevpnapp.customads.AdclosedListener;
+import com.webihostapp.xprofreevpnapp.customads.AdvertiseDialog;
 import com.webihostapp.xprofreevpnapp.utils.AdsUtility;
 import com.webihostapp.xprofreevpnapp.utils.AppOpenManagerTwo;
 import com.webihostapp.xprofreevpnapp.utils.BillConfig;
@@ -168,15 +171,29 @@ public class SplashActivity extends AppCompatActivity {
 
         Preference preference = new Preference(SplashActivity.this);
         if (!preference.isBooleenPreference(BillConfig.PRIMIUM_STATE)) {
-            AdsUtility.initAdmob(SplashActivity.this);
-            AppOpenManagerTwo.fetchAd(SplashActivity.this, new AdsUtility.AdFinished() {
+
+            AdvertiseDialog advertiseDialog = new AdvertiseDialog(this);
+            advertiseDialog.show(AdSettings.AD_URL_2);
+            advertiseDialog.setAdclosedListener(new AdclosedListener() {
                 @Override
-                public void onAdFinished() {
-                    Intent myIntent = new Intent(getApplicationContext(), GetStartedActivity.class);
-                    startActivity(myIntent);
-                    finish();
+                public void onAdClosed() {
+
+                    boolean isFirst = preference.isBooleenPreference("ifsfr");
+
+                    if (!isFirst){
+                        Intent myIntent = new Intent(getApplicationContext(), GetStartedActivity.class);
+                        startActivity(myIntent);
+                        finish();
+                    }else {
+                        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(myIntent);
+                        finish();
+                    }
+
+
                 }
             });
+
         } else {
             Intent myIntent = new Intent(getApplicationContext(), GetStartedActivity.class);
             startActivity(myIntent);

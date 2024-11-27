@@ -83,28 +83,12 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.webihostapp.xprofreevpnapp.customads.AdvertiseWebView
+            android:id="@+id/advertiseWebView"
+            android:layout_marginTop="@dimen/dp10"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical">
+            android:layout_height="140dp"/>
 
-            <RelativeLayout
-                android:id="@+id/getstartednative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:gravity="center"
-                android:maxWidth="300dp"
-                android:paddingTop="10dp" />
-
-
-        </LinearLayout>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
