@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.webihostapp.xprofreevpnapp.AdSettings;
 
 import com.webihostapp.xprofreevpnapp.Preference;
 import com.webihostapp.xprofreevpnapp.customads.AdvertiseWebView;

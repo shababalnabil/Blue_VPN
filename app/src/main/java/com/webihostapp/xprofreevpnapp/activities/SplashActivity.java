@@ -6,6 +6,8 @@ import static com.webihostapp.xprofreevpnapp.utils.BillConfig.One_Year_Sub;
 import static com.webihostapp.xprofreevpnapp.utils.BillConfig.PRIMIUM_STATE;
 import static com.webihostapp.xprofreevpnapp.utils.BillConfig.Six_Month_Sub;
 
+import com.webihostapp.xprofreevpnapp.AdSettings;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
