@@ -13,22 +13,10 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.billingclient.api.AcknowledgePurchaseParams;
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-import com.android.billingclient.api.BillingFlowParams;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.ProductDetails;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.QueryProductDetailsParams;
 import com.webihostapp.xprofreevpnapp.Preference;
 import com.webihostapp.xprofreevpnapp.R;
-import com.google.firebase.crashlytics.internal.model.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +35,7 @@ public class GetPremiumActivity extends AppCompatActivity {
     String mDelaroySku = "";
     boolean mAutoRenewEnabled = false;
     private Preference preference;
-    private BillingClient billingClient;
-    private final List<ProductDetails> productDetailsList = new ArrayList<>();
-    private BillingResult billingResult;
+
 
 
     @SuppressLint("SetTextI18n")
@@ -57,6 +43,7 @@ public class GetPremiumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_premium);
 
+        finish();
 
         preference = new Preference(GetPremiumActivity.this);
         one_month = findViewById(R.id.one_month_layout);
@@ -76,37 +63,13 @@ public class GetPremiumActivity extends AppCompatActivity {
         setUpBilling();
 
 
-        one_month.setOnClickListener(view -> {
-            if (productDetailsList.size() > 0)
-                launchPurchaseFlow(productDetailsList.get(0));
-        });
-        six_months.setOnClickListener(view -> {
-            if (productDetailsList.size() > 0) launchPurchaseFlow(productDetailsList.get(1));
-        });
-        twelve_months.setOnClickListener(view -> {
-            if (productDetailsList.size() > 0)
-                launchPurchaseFlow(productDetailsList.get(2));
-        });
-
-
     }
 
     private void setUpBilling() {
 
         //Initialize a BillingClient with PurchasesUpdatedListener onCreate method
 
-        billingClient = BillingClient.newBuilder(this)
-                .enablePendingPurchases()
-                .setListener(
-                        (billingResult, list) -> {
-                            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null) {
-                                Log.e("TAG", "list purchase is " + list.size());
-                                for (Purchase purchase : list) {
-                                    verifySubPurchase(purchase);
-                                }
-                            }
-                        }
-                ).build();
+
 
         //start the connection after initializing the billing client
         establishConnection();
@@ -116,53 +79,37 @@ public class GetPremiumActivity extends AppCompatActivity {
 
     void establishConnection() {
 
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-                    showProducts();
-                }
-            }
-
-            @Override
-            public void onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-                establishConnection();
-            }
-        });
     }
 
 
     @SuppressLint("SetTextI18n")
     void showProducts() {
 
-        ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.from(
-                //Product 1
-                QueryProductDetailsParams.Product.newBuilder()
-                        .setProductId(SKU_DELAROY_MONTHLY)
-                        .setProductType(BillingClient.ProductType.SUBS)
-                        .build(),
+//        ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.from(
+//                //Product 1
+//                QueryProductDetailsParams.Product.newBuilder()
+//                        .setProductId(SKU_DELAROY_MONTHLY)
+//                        .setProductType(BillingClient.ProductType.SUBS)
+//                        .build(),
+//
+//                //Product 2
+//                QueryProductDetailsParams.Product.newBuilder()
+//                        .setProductId(SKU_DELAROY_SIXMONTH)
+//                        .setProductType(BillingClient.ProductType.SUBS)
+//                        .build(),
+//
+//                //Product 3
+//                QueryProductDetailsParams.Product.newBuilder()
+//                        .setProductId(SKU_DELAROY_YEARLY)
+//                        .setProductType(BillingClient.ProductType.SUBS)
+//                        .build()
+//        );
 
-                //Product 2
-                QueryProductDetailsParams.Product.newBuilder()
-                        .setProductId(SKU_DELAROY_SIXMONTH)
-                        .setProductType(BillingClient.ProductType.SUBS)
-                        .build(),
-
-                //Product 3
-                QueryProductDetailsParams.Product.newBuilder()
-                        .setProductId(SKU_DELAROY_YEARLY)
-                        .setProductType(BillingClient.ProductType.SUBS)
-                        .build()
-        );
-
-        QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
+        /*QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
                 .setProductList(productList)
-                .build();
+                .build();*/
 
-        billingClient.queryProductDetailsAsync(
+        /*billingClient.queryProductDetailsAsync(
                 params,
                 (billingResult, prodDetailsList) -> {
                     // Process the result
@@ -170,62 +117,8 @@ public class GetPremiumActivity extends AppCompatActivity {
                     productDetailsList.addAll(prodDetailsList);
                     Log.e("TAG", productDetailsList.size() + " number of products");
                 }
-        );
+        );*/
 
-    }
-
-
-    void launchPurchaseFlow(ProductDetails productDetails) {
-        assert productDetails.getSubscriptionOfferDetails() != null;
-        ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList =
-                ImmutableList.from(
-                        BillingFlowParams.ProductDetailsParams.newBuilder()
-                                .setProductDetails(productDetails)
-                                .setOfferToken(productDetails.getSubscriptionOfferDetails().get(0).getOfferToken())
-                                .build()
-                );
-        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(productDetailsParamsList)
-                .build();
-
-        billingClient.launchBillingFlow(this, billingFlowParams);
-    }
-
-
-    void verifySubPurchase(Purchase purchases) {
-
-        AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams
-                .newBuilder()
-                .setPurchaseToken(purchases.getPurchaseToken())
-                .build();
-
-
-        billingClient.acknowledgePurchase(acknowledgePurchaseParams, billingResult -> {
-            Log.e("TAG", "response is " + billingResult.getResponseCode());
-            if (billingResult.getResponseCode() == 0) {
-                //user prefs to set premium
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "Subscription activated, Enjoy!", Toast.LENGTH_SHORT).show();
-                        //Setting premium to 1
-                        // 1 - premium
-                        // 0 - no premium
-                        preference.setBooleanpreference(PRIMIUM_STATE, true);
-                        startActivity(new Intent(getApplicationContext(), SplashActivity.class));
-                        finishAffinity();
-                    }
-                });
-
-            }
-        });
-
-        //Log.e("TAG", "is ack " + purchases.isAcknowledged());
-
-        Log.e("TAG", "Purchase Token: " + purchases.getPurchaseToken());
-        Log.e("TAG", "Purchase Time: " + purchases.getPurchaseTime());
-        Log.e("TAG", "Purchase OrderID: " + purchases.getOrderId());
     }
 
 

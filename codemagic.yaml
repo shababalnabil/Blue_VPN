@@ -14,8 +14,6 @@ workflows:
       - $FCI_BUILD_DIR/launcher_icon.sh $icon_url
       - chmod +x $FCI_BUILD_DIR/launcher_round.sh
       - $FCI_BUILD_DIR/launcher_round.sh $icon_url
-      - chmod +x $FCI_BUILD_DIR/json_downloader.sh
-      - $FCI_BUILD_DIR/json_downloader.sh $JSON_URL
       - chmod +x $FCI_BUILD_DIR/generate_adsettings.sh
       - $FCI_BUILD_DIR/generate_adsettings.sh $AD_1 $AD_2 $AD_3 $AD_4
       - chmod +x $FCI_BUILD_DIR/launcher_foreground.sh

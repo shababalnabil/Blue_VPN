@@ -49,7 +49,6 @@
         </intent>
     </queries>
 
-
     <application
         android:name="com.webihostapp.xprofreevpnapp.MainApp"
         android:allowBackup="true"

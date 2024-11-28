@@ -132,14 +132,12 @@ public abstract class UIActivity extends AppCompatActivity implements View.OnCli
 
 
             Menu menu = navigationView.getMenu();
-            menu.findItem(R.id.nav_prem).setVisible(true);
 
         } else {
             binding.premium.setVisibility(View.GONE);
 
 
             Menu menu = navigationView.getMenu();
-            menu.findItem(R.id.nav_prem).setVisible(false);
         }
 
 
@@ -624,10 +622,10 @@ public abstract class UIActivity extends AppCompatActivity implements View.OnCli
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_prem) {
+       /* if (id == R.id.nav_prem) {
             Intent intent = new Intent(UIActivity.this, GetPremiumActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_contact_us) {
+        } else*/ if (id == R.id.nav_contact_us) {
             Intent intent1 = new Intent(Intent.ACTION_SENDTO);
             intent1.setData(Uri.parse("mailto:"));
             intent1.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.Email)});

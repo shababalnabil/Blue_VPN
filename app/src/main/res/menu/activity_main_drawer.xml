@@ -5,12 +5,6 @@
 
     <group android:checkableBehavior="none">
 
-
-        <item
-            android:id="@+id/nav_prem"
-            android:icon="@drawable/ic_vip_white"
-            android:fontFamily="@font/quicksand_medium"
-            android:title="Get Premium" />
         <item
             android:id="@+id/nav_rate"
             android:icon="@drawable/ic_rate_playstore"

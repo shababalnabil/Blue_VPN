@@ -1,6 +1,5 @@
 package com.webihostapp.xprofreevpnapp.activities;
 
-import static com.webihostapp.xprofreevpnapp.utils.AdsUtility.id;
 import static com.webihostapp.xprofreevpnapp.utils.BillConfig.IN_PURCHASE_KEY;
 import static com.webihostapp.xprofreevpnapp.utils.BillConfig.One_Month_Sub;
 import static com.webihostapp.xprofreevpnapp.utils.BillConfig.One_Year_Sub;
@@ -10,9 +9,7 @@ import static com.webihostapp.xprofreevpnapp.utils.BillConfig.Six_Month_Sub;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -23,7 +20,6 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.QueryPurchasesParams;
-import com.webihostapp.xprofreevpnapp.AdSettings;
 import com.webihostapp.xprofreevpnapp.BuildConfig;
 import com.webihostapp.xprofreevpnapp.MainApp;
 import com.webihostapp.xprofreevpnapp.Preference;
@@ -31,19 +27,8 @@ import com.webihostapp.xprofreevpnapp.R;
 import com.webihostapp.xprofreevpnapp.customads.AdclosedListener;
 import com.webihostapp.xprofreevpnapp.customads.AdvertiseDialog;
 import com.webihostapp.xprofreevpnapp.utils.AdsUtility;
-import com.webihostapp.xprofreevpnapp.utils.AppOpenManagerTwo;
 import com.webihostapp.xprofreevpnapp.utils.BillConfig;
 import com.webihostapp.xprofreevpnapp.utils.NetworkStateUtility;
-import com.google.gson.JsonObject;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {

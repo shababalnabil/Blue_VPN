@@ -1,41 +1,20 @@
 package com.webihostapp.xprofreevpnapp.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.res.ColorStateList;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.AdapterStatus;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.webihostapp.xprofreevpnapp.AdSettings;
 import com.webihostapp.xprofreevpnapp.Preference;
 import com.webihostapp.xprofreevpnapp.customads.AdvertiseWebView;
-import com.webihostapp.xprofreevpnapp.utils.AdsUtility;
 import com.webihostapp.xprofreevpnapp.MainApp;
 import com.webihostapp.xprofreevpnapp.R;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class GetStartedActivity extends AppCompatActivity {
 

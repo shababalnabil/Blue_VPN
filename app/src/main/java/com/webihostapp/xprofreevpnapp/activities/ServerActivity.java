@@ -57,14 +57,7 @@ public class ServerActivity extends AppCompatActivity {
         regionsRecyclerView = findViewById(R.id.regions_recycler_view);
         AdsUtility.loadAdmobBanner(this, findViewById(R.id.bannerAd));
 
-
-
         Preference preference=new Preference(this);
-
-
-
-
-
 
 
         activity_name = findViewById(R.id.activity_names);
@@ -72,16 +65,19 @@ public class ServerActivity extends AppCompatActivity {
         activity_name.setText("Servers");
         backToActivity.setOnClickListener(view -> finish());
         regionChooserInterface = item -> {
-            if (!item.isPro()) {
-                Intent intent = new Intent();
-                Bundle args = new Bundle();
-                Gson gson = new Gson();
-                String json = gson.toJson(item);
+            Intent intent = new Intent();
+            Bundle args = new Bundle();
+            Gson gson = new Gson();
+            String json = gson.toJson(item);
 
-                args.putString(COUNTRY_DATA, json);
-                intent.putExtra(BUNDLE, args);
-                setResult(RESULT_OK, intent);
-                finish();
+            args.putString(COUNTRY_DATA, json);
+            intent.putExtra(BUNDLE, args);
+            setResult(RESULT_OK, intent);
+            finish();
+
+
+            if (!item.isPro()) {
+
               /*  AdsUtility.showInterAds(ServerActivity.this, new AdsUtility.AdFinished() {
                     @Override
                     public void onAdFinished() {
@@ -89,8 +85,8 @@ public class ServerActivity extends AppCompatActivity {
                     }
                 });*/
             } else {
-                Intent intent = new Intent(ServerActivity.this, GetPremiumActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(ServerActivity.this, GetPremiumActivity.class);
+                startActivity(intent);*/
             }
         };
 

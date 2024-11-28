@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.webihostapp.xprofreevpnapp.AdSettings;
 import com.webihostapp.xprofreevpnapp.customads.AdclosedListener;
 import com.webihostapp.xprofreevpnapp.customads.AdvertiseDialog;
 import com.webihostapp.xprofreevpnapp.dialog.CountryData;
