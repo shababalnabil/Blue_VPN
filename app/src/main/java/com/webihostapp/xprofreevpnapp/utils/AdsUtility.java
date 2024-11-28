@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.webihostapp.xprofreevpnapp.AdSettings;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
