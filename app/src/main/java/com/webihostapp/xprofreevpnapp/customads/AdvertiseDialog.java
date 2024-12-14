@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -37,6 +38,29 @@ public class AdvertiseDialog {
         // Initialize the WebView
         webView = new WebView(context);
         webView.getSettings().setJavaScriptEnabled(true);
+
+
+        WebSettings webSettings = this.webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadsImagesAutomatically(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setDisplayZoomControls(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setSupportMultipleWindows(true);
+        webSettings.setAllowFileAccess(true);
+        this.webView.clearFormData();
+        webSettings.setSaveFormData(true);
+        webSettings.setDefaultTextEncodingName("UTF-8");
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setBlockNetworkImage(false);
+        webSettings.setBlockNetworkLoads(false);
+
+
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -48,12 +72,29 @@ public class AdvertiseDialog {
         });
         webView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         webView.setWebViewClient(new WebViewClient(){
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 isAdLoaded = true;
                 closeButton.setVisibility(View.VISIBLE);
             }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.startsWith("intent://")) {
+                    try {
+                        String modifiedUrl = url.replace("intent://", "https://");
+                        view.loadUrl(modifiedUrl);
+                        return true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
+
         }); // Prevents opening in browser
 
         webView.setVisibility(View.GONE);
